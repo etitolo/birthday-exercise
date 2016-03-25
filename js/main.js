@@ -1,11 +1,12 @@
 var firstNameElement = document.getElementById("firstName");
 var secondNameElement = document.getElementById("lastName");
+var errorFirstName = document.getElementById("firstNameError");
+var errorSecondName = document.getElementById("secondNameError");
 
 function yourName() {
     var firstName = firstNameElement.value;
     var lastName = secondNameElement.value;
-    var errorFirstName = document.getElementById("firstNameError");
-    var errorSecondName = document.getElementById("secondNameError");
+
     
     if (!firstName) {
         errorFirstName.innerHTML = "Please enter your first name.";
