@@ -1,12 +1,11 @@
 var firstNameElement = document.getElementById("firstName");
 var secondNameElement = document.getElementById("lastName");
-var errorFirstName = document.getElementById("firstNameError");
-var errorSecondName = document.getElementById("secondNameError");
 
 function yourName() {
     var firstName = firstNameElement.value;
     var lastName = secondNameElement.value;
-
+    var errorFirstName = document.getElementById("firstNameError");
+    var errorSecondName = document.getElementById("secondNameError");
     
     if (!firstName) {
         errorFirstName.innerHTML = "Please enter your first name.";
@@ -23,10 +22,7 @@ function yourName() {
     document.getElementById("nameValues").innerHTML = firstName + " " + lastName;
 }
 
-var buttonList = document.querySelectorAll(".submitName");
-
-for(var i = 0; i < buttonList.length; i++) {
-   buttonList[i].onclick = yourName;
-}
+var buttonList = document.getElementsByTagName("body");
+buttonList[0].onclick = yourName;
 
 
