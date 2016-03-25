@@ -1,17 +1,22 @@
+var firstNameElement = document.getElementById("firstName");
+var secondNameElement = document.getElementById("lastName");
+
 function yourName() {
-    var firstName = document.getElementById("firstName").value;
-    var lastName = document.getElementById("lastName").value;
+    var firstName = firstNameElement.value;
+    var lastName = secondNameElement.value;
+    var errorFirstName = document.getElementById("firstNameError");
+    var errorSecondName = document.getElementById("secondNameError");
     
     if (!firstName) {
-        document.getElementById("firstNameError").innerHTML = "Please enter your first name.";
+        errorFirstName.innerHTML = "Please enter your first name.";
     } else {
-        document.getElementById("firstNameError").innerHTML = "";
+        errorFirstName.innerHTML = "";
     }
     
     if (!lastName) {
-        document.getElementById("secondNameError").innerHTML = "Please enter your last name.";
+        errorSecondName.innerHTML = "Please enter your last name.";
     } else {
-        document.getElementById("secondNameError").innerHTML = "";
+        errorSecondName.innerHTML = "";
     }
     
     document.getElementById("nameValues").innerHTML = firstName + " " + lastName;
@@ -19,6 +24,6 @@ function yourName() {
 
 var buttonList = document.querySelectorAll(".submitName");
 
-buttonList[0].onclick = function() {yourName();};
-buttonList[1].onclick = function() {yourName();};
+buttonList[0].onclick = yourName;
+buttonList[1].onclick = yourName;
 
