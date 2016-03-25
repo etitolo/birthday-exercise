@@ -24,6 +24,8 @@ function yourName() {
 
 var buttonList = document.querySelectorAll(".submitName");
 
-buttonList[0].onclick = yourName;
-buttonList[1].onclick = yourName;
+for(var i = 0; i < buttonList.length; i++) {
+   buttonList[i].onclick = yourName;
+}
+
 
