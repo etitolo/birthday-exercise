@@ -1,7 +1,7 @@
-var firstNameElement = document.getElementById("firstName");
-var secondNameElement = document.getElementById("lastName");
-var errorFirstName = document.getElementById("firstNameError");
-var errorSecondName = document.getElementById("secondNameError");
+var firstNameElement = document.querySelector(".firstName");
+var secondNameElement = document.querySelector(".lastName");
+var errorFirstName = document.querySelector(".firstNameError");
+var errorSecondName = document.querySelector(".secondNameError");
 
 function yourName() {
     var firstName = firstNameElement.value;
@@ -32,6 +32,9 @@ contentContainer.addEventListener("click", function(evt) {
     case "resetForm":
       reset();
       break;
+    case "addName":
+      addName();
+      break;
   }
                                                          }, false);
 
@@ -42,3 +45,10 @@ function reset() {
     firstNameElement.value = "";
     secondNameElement.value = "";
 }
+
+var nameWrapper = document.querySelector(".nameWrapper");
+function addName(){
+    var dup = nameWrapper.cloneNode(true);
+    nameWrapper.parentNode.appendChild(dup); 
+}
+

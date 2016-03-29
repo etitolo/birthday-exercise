@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>JS Bin</title>
-  </head>
-  <body>
-      <div class="content">
-        <p class="error" id="firstNameError"></p>
-        <p class="error" id="secondNameError"></p>
-        <button class="submitName">Submit</button>
-        <label>First*:
-            <input type="text" id="firstName">
-        </label>
-        <label>Last*:
-            <input type="text" id="lastName">
-        </label>
-        <button class="submitName">Submit</button>
-        <button id="resetForm" class="resetForm">Reset</button>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+    <div class="content">
+        <div class="nameWrapper">
+            <p class="error firstNameError"></p>
+            <p class="error secondNameError"></p>
+            <label>First*:
+                <input type="text" class="firstName">
+            </label>
+            <label>Last*:
+                <input type="text" class="lastName">
+            </label>
+            <button class="submitName">Submit</button>
+            <button class="addName">Add</button>
+            <button class="resetForm">Reset</button>
+        </div>
         <p id="nameValues"></p>
-      </div>
-  </body>
+    </div>
+</body>
 </html>
