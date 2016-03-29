@@ -22,15 +22,18 @@ function yourName() {
     document.getElementById("nameValues").innerHTML = firstName + " " + lastName;
 }
 
-var submitNames = document.querySelectorAll(".submitName");
-
-for (i = 0; i < submitNames.length; i++) {
-    var el = submitNames[i];
-    el.addEventListener("click", yourName, false);    
-}
-
-var resetButton = document.getElementById("resetForm");
-resetButton.addEventListener("click", reset, false);
+var contentContainer = document.querySelectorAll(".content")[0];
+contentContainer.addEventListener("click", function(evt) { 
+  var elementSelector = evt.target.className;
+  switch(elementSelector) {
+      case "submitName":
+        yourName();
+      break;
+    case "resetForm":
+      reset();
+      break;
+  }
+                                                         }, false);
 
 function reset() {
     errorFirstName.innerHTML = "";
