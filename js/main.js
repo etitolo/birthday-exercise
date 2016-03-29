@@ -22,7 +22,20 @@ function yourName() {
     document.getElementById("nameValues").innerHTML = firstName + " " + lastName;
 }
 
-var buttonList = document.getElementsByTagName("body");
-buttonList[0].onclick = yourName;
+var submitNames = document.querySelectorAll(".submitName");
 
+for (i = 0; i < submitNames.length; i++) {
+    var el = submitNames[i];
+    el.addEventListener("click", yourName, false);    
+}
 
+var resetButton = document.getElementById("resetForm");
+resetButton.addEventListener("click", reset, false);
+
+function reset() {
+    errorFirstName.innerHTML = "";
+    errorSecondName.innerHTML = "";
+    document.getElementById("nameValues").innerHTML = "";
+    firstNameElement.value = "";
+    secondNameElement.value = "";
+}
