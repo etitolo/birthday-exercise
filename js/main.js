@@ -1,4 +1,7 @@
-function yourName() {
+var bday = {};
+var contentContainer = document.querySelectorAll(".content")[0];
+
+bday.yourName = function(){
   var nameCount = document.querySelectorAll(".nameWrapper").length;
   for (var i=0; i < nameCount; i++) {
     var firstNameElement = document.querySelectorAll(".firstName")[i];
@@ -19,24 +22,25 @@ function yourName() {
     }
     document.querySelectorAll(".nameValues")[i].innerHTML = firstName + " " + lastName;
   }
-}
+};
 
-var contentContainer = document.querySelectorAll(".content")[0];
-contentContainer.addEventListener("click", function(evt){ 
-  var elementSelector = evt.target.className;
-  switch(elementSelector) {
+bday.buttonController = (function(){
+  contentContainer.addEventListener("click", function(evt){ 
+    var elementSelector = evt.target.className;
+    switch(elementSelector) {
       case "submitName":
-        yourName();
-      break;
-    case "resetForm":
-      reset();
-      break;
-    case "addName":
-      addName();
-      break;
-  }
-                                                         }, false);
-function reset() {
+        bday.yourName();
+        break;
+      case "resetForm":
+        bday.reset();
+        break;
+      case "addName":
+        bday.nameForm();
+        break;
+    }                                                       }, false);
+})();
+
+bday.reset = function(){
     var nameCount = document.querySelectorAll(".nameWrapper").length;
     for (var i=0; i < nameCount; i++) {
       var firstNameElement = document.querySelectorAll(".firstName")[i];
@@ -49,22 +53,18 @@ function reset() {
       firstNameElement.value = "";
       secondNameElement.value = "";
     }
-}
+};
 
-function nameForm() {
+bday.nameForm = function(){
     var buildNameWrapper = document.createElement("div");
+    var nameCount = document.querySelectorAll(".nameWrapper").length;
+    var addButton = nameCount === 0 ? "<button class=\"addName\">Add</button>" : "";
     buildNameWrapper.setAttribute('class', 'nameWrapper');
     buildNameWrapper.insertAdjacentHTML('beforeend', '<p class=\"error firstNameError\"></p><p class=\"error secondNameError\"></p>');
     buildNameWrapper.insertAdjacentHTML("beforeend","<label>First* <input type=\"text\" class=\"firstName\"></label><label>Last* <input type=\"text\" class=\"lastName\"></label>");
-    var nameCount = document.querySelectorAll(".nameWrapper").length;
-    var addButton = nameCount === 0 ? "<button class=\"addName\">Add</button>" : "";
     buildNameWrapper.insertAdjacentHTML("beforeend","<button class=\"submitName\">Submit</button>" + addButton + "<button class=\"resetForm\">Reset</button>" );
     buildNameWrapper.insertAdjacentHTML("beforeend","<p class=\"nameValues\"></p>");
     contentContainer.appendChild(buildNameWrapper);
-} nameForm();
+}; bday.nameForm();
 
-
-function addName(){
-  nameForm();
-}
 
