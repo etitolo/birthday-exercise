@@ -1,5 +1,14 @@
-var bday = {};
+var bday = bday || {};
 var contentContainer = document.querySelectorAll(".content")[0];
+
+bday.nameForm = function(){
+    var buildNameWrapper = document.createElement("div");
+    var nameCount = document.querySelectorAll(".nameWrapper").length;
+    var addButton = nameCount === 0 ? "<button class=\"addName\">Add</button>" : "";
+    buildNameWrapper.setAttribute("class", "nameWrapper");
+    buildNameWrapper.innerHTML = "<p class=\"error firstNameError\"></p><p class=\"error secondNameError\"></p><label>First* <input type=\"text\" class=\"firstName\"></label><label>Last* <input type=\"text\" class=\"lastName\"></label><button class=\"submitName\">Submit</button>" + addButton + "<button class=\"resetForm\">Reset</button><p class=\"nameValues\"></p>";
+    contentContainer.appendChild(buildNameWrapper);
+}; bday.nameForm();
 
 bday.yourName = function(){
   var nameCount = document.querySelectorAll(".nameWrapper").length;
@@ -54,17 +63,3 @@ bday.reset = function(){
       secondNameElement.value = "";
     }
 };
-
-bday.nameForm = function(){
-    var buildNameWrapper = document.createElement("div");
-    var nameCount = document.querySelectorAll(".nameWrapper").length;
-    var addButton = nameCount === 0 ? "<button class=\"addName\">Add</button>" : "";
-    buildNameWrapper.setAttribute('class', 'nameWrapper');
-    buildNameWrapper.insertAdjacentHTML('beforeend', '<p class=\"error firstNameError\"></p><p class=\"error secondNameError\"></p>');
-    buildNameWrapper.insertAdjacentHTML("beforeend","<label>First* <input type=\"text\" class=\"firstName\"></label><label>Last* <input type=\"text\" class=\"lastName\"></label>");
-    buildNameWrapper.insertAdjacentHTML("beforeend","<button class=\"submitName\">Submit</button>" + addButton + "<button class=\"resetForm\">Reset</button>" );
-    buildNameWrapper.insertAdjacentHTML("beforeend","<p class=\"nameValues\"></p>");
-    contentContainer.appendChild(buildNameWrapper);
-}; bday.nameForm();
-
-
