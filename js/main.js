@@ -1,7 +1,4 @@
-"use strict";
-
 var formContainer = document.querySelector(".formContainer");
-
 
 function injectForm(containerNode) {
     var buildNameWrapper = document.createElement("div");
@@ -23,12 +20,10 @@ function reset(parentNode) {
 }
 
 function deleteEntry(){
-    var deleteCheckbox = document.querySelectorAll(".deleteCheckbox");
-    var parent = document.querySelectorAll(".nameWrapper");
+    var deleteCheckbox = document.querySelectorAll(".deleteCheckbox:checked");
     for (var count=0; count < deleteCheckbox.length; count++) {
-        if (deleteCheckbox[count].checked === true && deleteCheckbox.length !== 1) {
-          parent[count].parentNode.removeChild(parent[count]);
-        }
+      var nameWrapper = deleteCheckbox[count].parentNode.parentNode;
+      formContainer.removeChild(nameWrapper);
     }
 }
 
@@ -89,6 +84,3 @@ function initialize() {
 
 initialize();
 registerEventListners();
-
-
-
