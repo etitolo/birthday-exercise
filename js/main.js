@@ -1,3 +1,4 @@
+"use strict";
 
 var formContainer = document.querySelector(".formContainer");
 
@@ -5,7 +6,7 @@ var formContainer = document.querySelector(".formContainer");
 function injectForm(containerNode) {
     var buildNameWrapper = document.createElement("div");
     buildNameWrapper.setAttribute("class", "nameWrapper");
-    buildNameWrapper.innerHTML = "<p class=\"error firstNameError\"></p><p class=\"error secondNameError\"></p><label>First* <input type=\"text\" class=\"firstName\"></label><label>Last* <input type=\"text\" class=\"lastName\"></label><button class=\"submitName\">Submit</button><button class=\"resetForm\">Reset</button><p class=\"nameValues\"></p>";
+    buildNameWrapper.innerHTML = "<div class=sidebar><input type=checkbox class=deleteCheckbox></div><div class=inputContainer><p class=\"error firstNameError\"><p class=\"error secondNameError\"></p><label>First* <input class=firstName></label><label>Last* <input class=lastName></label><button class=submitName>Submit</button> <button class=resetForm>Reset</button><p class=nameValues></p></div>";
     containerNode.appendChild(buildNameWrapper);
 }
 
@@ -21,13 +22,23 @@ function reset(parentNode) {
   }
 }
 
-function handleSubmit(parentNode) {
+function deleteEntry(){
+    var deleteCheckbox = document.querySelectorAll(".deleteCheckbox");
+    var parent = document.querySelectorAll(".nameWrapper");
+    for (var count=0; count < deleteCheckbox.length; count++) {
+        if (deleteCheckbox[count].checked === true && deleteCheckbox.length !== 1) {
+          parent[count].parentNode.removeChild(parent[count]);
+        }
+    }
+}
+
+function handleSubmit(parentNode){
     var firstNameElement = parentNode.querySelector(".firstName"),
         secondNameElement = parentNode.querySelector(".lastName"),
         errorFirstName = parentNode.querySelector(".firstNameError"),
         errorSecondName = parentNode.querySelector(".secondNameError"),
         firstName = firstNameElement.value,
-        lastName = secondNameElement.value;    
+        lastName = secondNameElement.value;
     if (!firstName){
         errorFirstName.innerHTML = "Please enter your first name.";
     } else {
@@ -43,15 +54,19 @@ function handleSubmit(parentNode) {
 
 function registerEventListners() {
   var addButton = document.querySelector(".addName");
+  var deleteButton = document.querySelector(".deleteName");
 
   addButton.addEventListener("click", function(evt){
      injectForm(formContainer);
   });
 
+  deleteButton.addEventListener("click", function(evt){
+     deleteEntry();
+  });
+
   formContainer.addEventListener("click", function(evt){
     var targetClassName = evt.target.className,
         parentNode = evt.target.parentElement;
-    
     switch(targetClassName) {
       case "submitName":
         handleSubmit(parentNode);
@@ -59,15 +74,14 @@ function registerEventListners() {
       case "resetForm":
         reset(parentNode);
         break;
-    }          
+    }
   });
 }
 
 function initialize() {
   var addButton =  document.createElement("div"),
       buttonContainer = document.querySelector(".buttonContainer");
-  addButton.innerHTML = "<button class=\"addName\">Add</button>";
-  
+  addButton.innerHTML = "<button class=\"addName\">Add</button><button class=\"deleteName\">Delete</button>";
   buttonContainer.appendChild(addButton);
 
   injectForm(formContainer);
