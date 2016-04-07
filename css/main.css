@@ -17,3 +17,22 @@ label {
     color: red;
 }
 
+.hide {
+    display: none;
+}
+
+.nameWrapper {
+  display: flex;
+}
+
+.sidebar {
+    padding: 10px
+}
+
+.messaging {
+    text-align: center;
+    background-color: black;
+    color: #FFF;
+    height: 30px;
+    line-height: 30px;
+}
