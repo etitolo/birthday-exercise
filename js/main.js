@@ -47,23 +47,23 @@ function handleSubmit(parentNode){
     parentNode.querySelector(".nameValues").innerHTML = firstName + " " + lastName;
 }
 
-function setSessionStorage(){
+function setLocalStorage(){
   var firstNameElement = formContainer.querySelectorAll(".firstName"),
       lastNameElement = formContainer.querySelectorAll(".lastName"),
       firstNameArray = [],
       lastNameArray = [];
-  if (window.sessionStorage) {
+  if (window.localStorage) {
     for (var count=0; count < firstNameElement.length; count++) {
       var firstName = firstNameElement[count].value;
       var lastName = lastNameElement[count].value;
       firstNameArray.push(firstName);
       lastNameArray.push(lastName);
-      window.sessionStorage.setItem('firstName', JSON.stringify(firstNameArray));
-      window.sessionStorage.setItem('lastName', JSON.stringify(lastNameArray));
+      window.localStorage.setItem('firstName', JSON.stringify(firstNameArray));
+      window.localStorage.setItem('lastName', JSON.stringify(lastNameArray));
     }
     messaging();
   } else {
-    alert("Session storage is not available.");
+    alert("Local storage is not available.");
   }
 }
 
@@ -86,12 +86,12 @@ function registerEventListners() {
   });
 
   saveButton.addEventListener("click", function(evt){
-     setSessionStorage();
+     setLocalStorage();
   });
 
   formContainer.addEventListener("click", function(evt){
     var targetClassName = evt.target.className,
-        parentNode = evt.target.parentElement;
+        plocalde = evt.target.parentElement;
     switch(targetClassName) {
       case "submitName":
         handleSubmit(parentNode);
