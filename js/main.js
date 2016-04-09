@@ -136,9 +136,19 @@ function registerEventListners() {
 
 function initialize() {
   var addButton =  document.createElement("div"),
+      containerNode = document.querySelector(".formContainer"),
       buttonContainer = document.querySelector(".buttonContainer");
   addButton.innerHTML = "<button class=\"addName\">Add</button><button class=\"saveName\">Save</button><button class=\"deleteName\">Delete</button>";
   buttonContainer.appendChild(addButton);
+  if (window.localStorage) {
+    var jsonObject = JSON.parse(localStorage.getItem("nameWrapper"));
+    if (!jsonObject || jsonObject == "") {
+      injectForm(containerNode);
+      localStorage.setItem("nameWrapper", "[]");
+      }
+    } else {
+      alert("you have no local storage")
+    }
   getLocalStorage();
 }
 
