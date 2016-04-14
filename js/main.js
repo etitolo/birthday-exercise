@@ -1,6 +1,8 @@
 var formContainer = document.querySelector(".formContainer");
 
 function injectForm(containerNode,firstName,lastName) {
+  var firstName = firstName || "";
+  var lastName = lastName || "";
   var buildNameWrapper = document.createElement("div");
   buildNameWrapper.setAttribute("class", "nameWrapper fadeInLeft");
   buildNameWrapper.innerHTML = "<div class='sidebar'><input type='checkbox' class='deleteCheckbox'></div><div class='inputContainer'><p class='error firstNameError'><p class='error secondNameError'></p><label>First* <input type='text' value='" + firstName + "' class='firstName'></label><label>Last* <input type='text' value='" + lastName + "' class='lastName'></label><button class='submitName'>Submit</button><button class='resetForm'>Reset</button><p class='nameValues'></p></div>";
@@ -75,12 +77,10 @@ function getLocalStorage() {
     if (jsonObject) {
       var nameWrappers = jsonObject.length,
           containerNode = document.querySelector(".formContainer");
-      for (var i=0; i < nameWrappers; i++) {
-        injectForm(containerNode);
-        var firstNameInput = document.querySelectorAll(".firstName");
-        var lastNameInput = document.querySelectorAll(".lastName");
-        firstNameInput[i].value = jsonObject[i].firstName;
-        lastNameInput[i].value = jsonObject[i].lastName;
+      for (var count=0; count < nameWrappers; count++) {
+        var firstNameValue = jsonObject[count].firstName;
+        var lastNameValue = jsonObject[count].lastName; 
+        injectForm(containerNode,firstNameValue,lastNameValue);    
       }
     }
   } else {
@@ -102,11 +102,9 @@ function getRemoteRandomList(){
       var randomUsers = JSON.parse(xhttp.responseText);
       var usersLength = randomUsers.info.results;
       for (var count=0; count < usersLength; count++) {
-        injectForm(containerNode);
-        var firstNameInput = document.querySelectorAll(".firstName");
-        var lastNameInput = document.querySelectorAll(".lastName");
-        firstNameInput[count].value = randomUsers.results[count].name.first;
-        lastNameInput[count].value = randomUsers.results[count].name.last;    
+        var firstNameValue = randomUsers.results[count].name.first;
+        var lastNameValue = randomUsers.results[count].name.last; 
+        injectForm(containerNode,firstNameValue,lastNameValue);    
       }
     }
   };
